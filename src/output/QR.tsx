@@ -1,5 +1,5 @@
 import { QRCode } from "react-qrcode-logo";
-import { QRSettings } from "../QRSettings";
+import { QRSettings } from "../settings/QRSettings";
 interface Props {
     value: string;
     settings: QRSettings;
