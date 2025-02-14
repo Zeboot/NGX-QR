@@ -2454,6 +2454,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -2681,6 +2688,8 @@ __metadata:
     globals: ^15.14.0
     react: ^19.0.0
     react-dom: ^19.0.0
+    react-qrcode-logo: ^3.0.0
+    react-to-print: ^3.0.5
     tailwindcss: ^4.0.6
     typescript: ~5.7.2
     typescript-eslint: ^8.22.0
@@ -2891,6 +2900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qrcode-generator@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "qrcode-generator@npm:1.4.4"
+  checksum: 860cfdd2a7a608d34e92cab99774cc08182e1911432f30ed36d16f8a5cdabd7fdf40239caed91fa2691cfe66c8d95c1340a2fc9cc439eed07a9f2eb328c6f527
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -2928,10 +2944,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-qrcode-logo@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "react-qrcode-logo@npm:3.0.0"
+  dependencies:
+    lodash.isequal: ^4.5.0
+    qrcode-generator: ^1.4.4
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: e61945a6980108202422533db0fd54641a499ef0bd04cc82fe7e6fd7e54d9e15c5481f4a4d1b8df314ba8c7914cb2cb67f38841828633a74b49bec45460f3e8e
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.14.2":
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
   checksum: d80db4bd40a36dab79010dc8aa317a5b931f960c0d83c4f3b81f0552cbcf7f29e115b84bb7908ec6a1eb67720fff7023084eff73ece8a7ddc694882478464382
+  languageName: node
+  linkType: hard
+
+"react-to-print@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "react-to-print@npm:3.0.5"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ~19
+  checksum: 0d2dccf5d78fab3d9e4c9cf15c61fe7a14f7b4b46e18a5061031bf067d6cfc523af627b513996410ec98c9812e2229aaec98fee9f51ec4b0d74299e8f2610162
   languageName: node
   linkType: hard
 

@@ -1,11 +1,23 @@
-import { Card, Input, Typography } from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
+import { useGenerationContext } from "./GenerationContext";
 
-export default function GenerationInput() {
+interface Props {
+  handlePrint: () => void;
+}
+
+export default function GenerationInput({handlePrint}: Props) {
     const [startingNumber, setStartingNumber] = useState(1);
     const [prefix, setPrefix] = useState("ASN");
     const [length, setLength] = useState(5);
-    return <Card color="transparent" shadow={false}>
+    const context = useGenerationContext();
+
+    const onClick = () => {
+        context.setStartingNumber(startingNumber);
+        context.setPrefix(prefix);
+        context.setLength(length);
+    };
+    return <Card color="transparent" shadow={false} className="container items-center mx-auto">
     <Typography variant="h4" color="blue-gray">
       Generation Settings
     </Typography>
@@ -38,6 +50,8 @@ export default function GenerationInput() {
           onChange={(e) => setLength(parseInt(e.target.value, 10))}
         />
       </div>
+      <Button onClick={onClick}>Generate</Button>
+      <Button onClick={handlePrint}>Print</Button>
     </form>
   </Card>;
 }
