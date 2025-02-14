@@ -1,22 +1,19 @@
 import { createContext, useContext, useState } from "react";
-interface GenerationContextType {
+type GenerationContextParameters = {
     prefix: string,
     length: number,
     startingNumber: number
 }
+
+type GenerationContextType = {current: GenerationContextParameters, set: (val: GenerationContextParameters) => void};
+
 const GenerationContext = createContext<GenerationContextType|null>(null);
 
 export function GenerationContextProvider({children}: React.PropsWithChildren) {
-    const [startingNumber, setStartingNumber] = useState(1);
-    const [prefix, setPrefix] = useState("ASN");
-    const [length, setLength] = useState(5);
-    const contextValue = {
-        startingNumber,
-        setStartingNumber,
-        prefix,
-        setPrefix,
-        length,
-        setLength
+    const [context, setContext] = useState<GenerationContextParameters>({prefix: "ASN", length: 5, startingNumber: 1});
+    const contextValue: GenerationContextType = {
+        current: context,
+        set: setContext
       };
     return <GenerationContext.Provider value={contextValue}>
         {children}
@@ -24,5 +21,5 @@ export function GenerationContextProvider({children}: React.PropsWithChildren) {
 }
 
 export function useGenerationContext(): GenerationContextType{
-    return useContext(GenerationContext);
+    return useContext(GenerationContext) as unknown as GenerationContextType;
 }

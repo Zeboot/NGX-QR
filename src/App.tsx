@@ -1,7 +1,7 @@
 import './App.css'
 
-import GenerationInput from './GenerationInput'
-import GenerationOutput from './GenerationOutput'
+import GenerationInput from './input/GenerationInput'
+import GenerationOutput from './output/GenerationOutput'
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 
