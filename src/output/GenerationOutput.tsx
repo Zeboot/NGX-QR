@@ -7,7 +7,7 @@ const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRe
     const context = useGenerationContext().current;
     const values = useMemo(() => {
         return Array.from({length: 189}, (_, index) => {
-            if((index+1) < context.startingLabel || index >= context.labelCount) return undefined;
+            if((index+1) < context.startingLabel || index >= (context.labelCount + context.startingLabel - 1)) return undefined;
             return `${context.prefix}${(context.startingNumber + index - (context.startingLabel - 1)).toString().padStart(context.length, "0")}`;
         });
     }, [context.prefix, context.length, context.startingNumber, context.startingLabel, context.labelCount]);
