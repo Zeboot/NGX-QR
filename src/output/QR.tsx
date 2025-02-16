@@ -7,12 +7,14 @@ interface Props {
 export default function QR({value, settings} : Props) {
     return <QRCode 
         logoImage="/react.svg" 
-        removeQrCodeBehindLogo={true} 
-        ecLevel="Q" 
+        removeQrCodeBehindLogo={false} 
+        ecLevel="H" 
         quietZone={0} 
         value={value} 
         size={300}
         logoWidth={300*settings.logoModifier}
+        eyeRadius={[10,50,25]}
+        eyeColor={["#FF00FF", "#00FFFF", "#FFFF00"]}
         style={{height: "9mm", width: "9mm", marginRight: "0.5mm"}}
         {...settings}
     />

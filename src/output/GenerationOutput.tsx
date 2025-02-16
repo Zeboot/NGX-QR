@@ -1,10 +1,10 @@
 import { forwardRef, ForwardRefRenderFunction, useEffect, useMemo, useState } from "react";
 import Label from "./Label";
 
-import { useGenerationContext } from "../settings/GenerationContext";
+import { useGenerationSettings } from "../context/GenerationContext";
 
 const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRef) => {
-    const context = useGenerationContext().current;
+    const context = useGenerationSettings();
     const [labels, setLabels] = useState<JSX.Element[]>([]);
     const values = useMemo(() => {
         return Array.from({length: 189}, (_, index) => {

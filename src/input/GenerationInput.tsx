@@ -1,10 +1,9 @@
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useMemo, useState } from "react";
-import { useGenerationContext } from "../settings/GenerationContext";
+import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./NumberInputField";
 import InputField from "./InputField";
-import { useQRContext } from "../settings/QRSettings";
-
+import { useQRContext } from "../context/QRContext";
 interface Props {
   handlePrint: () => void;
 }
@@ -54,7 +53,6 @@ export default function GenerationInput({handlePrint}: Props) {
         </Typography>
         <div className="mb-1 flex flex-row flex-wrap gap-6">
           <InputField className="mb-1 flex flex-col gap-6" description="Color" label="Color" value={color} onChange={setColor} type="color" />
-
         </div>
       </div>
       <div className="flex justify-center">
