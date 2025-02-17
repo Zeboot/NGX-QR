@@ -8,7 +8,7 @@ const QRContext = createContext<QRSettingsContextType|null>(null);
 export function QRContextProvider({children}: React.PropsWithChildren) {
     const [context, setContext] = useState<QRSettings>({
             fgColor: "#000000",
-            logoModifier: 0.33,
+            logoModifier: 0.3,
             qrStyle: "fluid"
         });
     const updateContext = (val: Partial<QRSettings>) => {

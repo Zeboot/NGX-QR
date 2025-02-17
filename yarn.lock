@@ -543,6 +543,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroicons/react@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@heroicons/react@npm:2.2.0"
+  peerDependencies:
+    react: ">= 16 || ^19.0.0-rc"
+  checksum: 10/5bf8a3faa16f1566165bfaec2448ce3c2bd3e4f49e446ccf233f6aa63626155585eaf7e89f01fb4e8e92dfca3d7113b8c517c3b3c04036b9243c818595db3908
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -2679,6 +2688,7 @@ __metadata:
   resolution: "ngx-qr@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.19.0"
+    "@heroicons/react": "npm:^2.2.0"
     "@material-tailwind/react": "npm:^2.1.10"
     "@tailwindcss/vite": "npm:^4.0.6"
     "@types/react": "npm:18.2.19"
@@ -2691,7 +2701,6 @@ __metadata:
     globals: "npm:^15.14.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
-    react-icons-picker: "npm:^1.0.9"
     react-qrcode-logo: "npm:^3.0.0"
     react-to-print: "npm:^3.0.5"
     tailwindcss: "npm:^4.0.6"
@@ -2938,17 +2947,6 @@ __metadata:
   peerDependencies:
     react: ^19.0.0
   checksum: 10/aa64a2f1991042f516260e8b0eca0ae777b6c8f1aa2b5ae096e80bbb6ac9b005aef2bca697969841d34f7e1819556263476bdfea36c35092e8d9aefde3de2d9a
-  languageName: node
-  linkType: hard
-
-"react-icons-picker@npm:^1.0.9":
-  version: 1.0.9
-  resolution: "react-icons-picker@npm:1.0.9"
-  peerDependencies:
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-icons: ^4.4.0
-  checksum: 10/84aee73851883b8c60138c777311d764111a7de83d8a93ef5f2b855bbfaec44ec7fd895f30ecbc742b311d3e0d8515f71c723139e1a83ad8e7bf05d81a4d11dc
   languageName: node
   linkType: hard
 
