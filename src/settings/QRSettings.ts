@@ -1,8 +1,8 @@
-export type qrStyle = "squares" | "dots" | "fluid";
-
-export interface QRSettings {
-    fgColor: string;
+import { IProps } from "react-qrcode-logo";
+export type QRSettings = Pick<IProps, 
+    "fgColor" | 
+    "qrStyle" 
+    > &
+{
     logoModifier: number;
-    qrStyle: qrStyle;
 }
-

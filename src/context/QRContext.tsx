@@ -1,24 +1,24 @@
 import { useState, useContext, createContext } from "react";
-import { QRSettings, qrStyle } from "../settings/QRSettings";
+import { QRSettings } from "../settings/QRSettings";
 
-type QRSetters = {
-    [K in keyof QRSettings as `set${Capitalize<string & K>}`]: (value: QRSettings[K]) => void;
-}
 
-type QRSettingsContextType = QRSettings & QRSetters;
+type QRSettingsContextType = {current: QRSettings, set: (val: Partial<QRSettings>) => void};
 
 const QRContext = createContext<QRSettingsContextType|null>(null);
 export function QRContextProvider({children}: React.PropsWithChildren) {
-    const [fgColor, setFgColor] = useState("#000000");
-    const [logoModifier, setLogoModifier] = useState(0.33);
-    const [qrStyle, setQrStyle] = useState<qrStyle>("fluid");
+    const [context, setContext] = useState<QRSettings>({
+            fgColor: "#000000",
+            logoModifier: 0.33,
+            qrStyle: "fluid"
+        });
+    const updateContext = (val: Partial<QRSettings>) => {
+        setContext(old => {
+            return {...old, ...val};
+        });
+    };
     const contextValue: QRSettingsContextType = {
-        fgColor,
-        setFgColor,
-        logoModifier,
-        setLogoModifier,
-        qrStyle,
-        setQrStyle
+        current: context,
+        set: updateContext
       };
     return <QRContext.Provider value={contextValue}>
         {children}
@@ -30,5 +30,5 @@ export function useQRContext(): QRSettingsContextType{
 }
 
 export function useQRSettings(): QRSettings{
-    return useContext(QRContext) as unknown as QRSettings;
+    return useQRContext().current;
 }

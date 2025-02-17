@@ -8,6 +8,7 @@ const GenerationContext = createContext<GenerationContextType|null>(null);
 
 export function GenerationContextProvider({children}: React.PropsWithChildren) {
     const [context, setContext] = useState<GenerationSettings>({
+        layout: 0,
         prefix: "ASN", 
         length: 5, 
         startingNumber: 1,
@@ -17,7 +18,12 @@ export function GenerationContextProvider({children}: React.PropsWithChildren) {
 
     const updateContext = (val: Partial<GenerationSettings>) => {
         setContext(old => {
-            return {...old, ...val};
+            Object.keys(val).forEach(key => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                old[key] = val[key];
+            });
+            return old;
         });
     };
 
