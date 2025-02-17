@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useEffect, useMemo, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./NumberInputField";
@@ -50,6 +50,7 @@ export default function GenerationInput({handlePrint}: Props) {
           <NumberInputField className="mb-1 flex flex-col gap-6" description="Length of Number" label="Length" value={length} onChange={setLength} />
           <NumberInputField className="mb-1 flex flex-col gap-6" description="Start at label" label="Start" min={1} max={MAX_FOR_LAYOUT} value={startingLabel} onChange={setStartingLabel} />
           <NumberInputField className="mb-1 flex flex-col gap-6" description="# of labels" label="Count" min={1} max={MAX_LABELS} value={labelCount} onChange={setLabelCount} />
+          <Input type="file" className="mb-1 flex flex-col gap-6" label="Image" accept="image/*"/>
         </div>
       </div>
       <div className="flex flex-col">
