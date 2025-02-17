@@ -57,7 +57,7 @@ export default function GenerationInput({handlePrint}: Props) {
         QRContext.set({fgColor: color, logoImage: iconBase64, logoModifier: +(logoModifier/100).toPrecision(2), removeQrCodeBehindLogo: !iconTransparency, eye_form, qrStyle, ecLevel});
     };
 
-    return <Card color="transparent" shadow={true} className="container items-center mx-auto">
+    return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">
     <form className="mt-8 mb-2 flex flex-col">
       <div className="flex flex-col">
         <Typography variant="h4" color="blue-gray">
