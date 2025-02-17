@@ -1,4 +1,4 @@
-import { Button, Card, Dialog, DialogBody, DialogHeader, Input, Typography } from "@material-tailwind/react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useMemo, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./NumberInputField";
