@@ -18,12 +18,7 @@ export function GenerationContextProvider({children}: React.PropsWithChildren) {
 
     const updateContext = (val: Partial<GenerationSettings>) => {
         setContext(old => {
-            Object.keys(val).forEach(key => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore
-                old[key] = val[key];
-            });
-            return old;
+            return {...old,...val};
         });
     };
 
