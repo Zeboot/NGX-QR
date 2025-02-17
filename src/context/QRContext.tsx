@@ -9,7 +9,7 @@ export function QRContextProvider({children}: React.PropsWithChildren) {
     const [context, setContext] = useState<QRSettings>({
             fgColor: "#000000",
             logoModifier: 0.3,
-            qrStyle: "fluid",
+            qrStyle: "squares",
             eye_form: EYE_FORM.ROUNDED_SQUARE,
             ecLevel: "Q"
         });
