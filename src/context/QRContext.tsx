@@ -11,7 +11,9 @@ export function QRContextProvider({children}: React.PropsWithChildren) {
             logoModifier: 0.3,
             qrStyle: "squares",
             eye_form: EYE_FORM.ROUNDED_SQUARE,
-            ecLevel: "Q"
+            ecLevel: "Q",
+            icon: null,
+            iconColor: '#0000FF'
         });
     const updateContext = (val: Partial<QRSettings>) => {
         setContext(old => {

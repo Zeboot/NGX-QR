@@ -25,8 +25,8 @@ export default function GenerationInput({handlePrint}: Props) {
 
     const QRContext = useQRContext();
     const [color, setColor] = useState(QRContext.current.fgColor);
-    const [icon, setIcon] = useState<string | null>(null);
-    const [iconColor, setIconColor] = useState('#0000FF');
+    const [icon, setIcon] = useState<string | null>(QRContext.current.icon);
+    const [iconColor, setIconColor] = useState(QRContext.current.iconColor);
     const [logoModifier, setLogoModifier] = useState((QRContext.current.logoModifier*100));
     const [iconTransparency, setIconTransparency] = useState(!(QRContext.current.removeQrCodeBehindLogo));
     const [eye_form, setEyeForm] = useState(QRContext.current.eye_form);
@@ -54,7 +54,17 @@ export default function GenerationInput({handlePrint}: Props) {
 
     const onClick = () => {
         context.set({startingNumber, prefix, length, startingLabel, labelCount});
-        QRContext.set({fgColor: color, logoImage: iconBase64, logoModifier: +(logoModifier/100).toPrecision(2), removeQrCodeBehindLogo: !iconTransparency, eye_form, qrStyle, ecLevel});
+        QRContext.set({
+          fgColor: color, 
+          icon: icon,
+          logoImage: iconBase64, 
+          logoModifier: +(logoModifier/100).toPrecision(2), 
+          removeQrCodeBehindLogo: 
+          !iconTransparency, 
+          eye_form, 
+          qrStyle, 
+          ecLevel
+        });
     };
 
     return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">

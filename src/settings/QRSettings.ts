@@ -23,5 +23,7 @@ export type QRSettings = Pick<IProps,
     > &
 {
     logoModifier: number;
-    eye_form: EYE_FORM
+    eye_form: EYE_FORM;
+    icon: string | null;
+    iconColor: string;
 }
