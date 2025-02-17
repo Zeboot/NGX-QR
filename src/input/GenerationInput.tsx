@@ -91,7 +91,7 @@ export default function GenerationInput({handlePrint}: Props) {
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="h6" color="blue-gray" className="-mb-3">Dot Style</Typography>
             <Select label="Style" value={qrStyle} onChange={e => setQRStyle(e as never)}>
-              <Option value="square">Square</Option>
+              <Option value="squares">Squares</Option>
               <Option value="dots">Dots</Option>
               <Option value="fluid">Fluid</Option>
             </Select>
