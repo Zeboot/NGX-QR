@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { GenerationSettings } from "../settings/GenerationSettings";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 
 type GenerationContextType = {current: GenerationSettings, set: (val: Partial<GenerationSettings>) => void};
@@ -7,7 +8,7 @@ type GenerationContextType = {current: GenerationSettings, set: (val: Partial<Ge
 const GenerationContext = createContext<GenerationContextType|null>(null);
 
 export function GenerationContextProvider({children}: React.PropsWithChildren) {
-    const [context, setContext] = useState<GenerationSettings>({
+    const [context, setContext] = useLocalStorage<GenerationSettings>("generation_settings", {
         layout: 0,
         prefix: "ASN", 
         length: 5, 
