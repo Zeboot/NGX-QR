@@ -1,5 +1,5 @@
 import { useState, useContext, createContext } from "react";
-import { QRSettings } from "../settings/QRSettings";
+import { EYE_FORM, QRSettings } from "../settings/QRSettings";
 
 
 type QRSettingsContextType = {current: QRSettings, set: (val: Partial<QRSettings>) => void};
@@ -9,7 +9,9 @@ export function QRContextProvider({children}: React.PropsWithChildren) {
     const [context, setContext] = useState<QRSettings>({
             fgColor: "#000000",
             logoModifier: 0.3,
-            qrStyle: "fluid"
+            qrStyle: "fluid",
+            eye_form: EYE_FORM.ROUNDED_SQUARE,
+            ecLevel: "Q"
         });
     const updateContext = (val: Partial<QRSettings>) => {
         setContext(old => {
