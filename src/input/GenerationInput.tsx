@@ -184,14 +184,15 @@ export default function GenerationInput({handlePrint}: Props) {
             Note: This test only checks validity of QR code and does not guarantee scannability - errors due to printer quality or size of QR code can still occur.
           </Typography>
           <div className="flex flex-row gap-2">
-            <Alert color={testResult.found === labelCount ? "green" : "red"}>
-              <Typography>{testResult.found}/{labelCount}</Typography> QR codes found
+            <Alert color={testResult.found === context.current.labelCount ? "green" : "red"}>
+              <Typography>{testResult.found}/{context.current.labelCount}</Typography> QR codes found
             </Alert>
-            <Alert color={testResult.recognized === labelCount ? "green" : "red"}>
-              <Typography>{testResult.recognized}/{labelCount}</Typography> QR codes recognized as valid QR codes
+            <Alert color={testResult.recognized === context.current.labelCount ? "green" : "red"}>
+              <Typography>{testResult.recognized}/{context.current.labelCount}</Typography> QR codes recognized as valid QR codes
             </Alert>
-            <Alert color={testResult.correct === labelCount ? "green" : "red"}>
-              <Typography>{testResult.correct}/{labelCount}</Typography> QR codes scan as the correct value
+            <Alert color={testResult.correct === context.current.labelCount ? "green" : "red"}>
+              <Typography>{testResult.correct}/{context.current.labelCount}</Typography> QR codes scan as the correct value
+
             </Alert>
           </div>
         </> 
