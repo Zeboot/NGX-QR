@@ -187,11 +187,11 @@ export default function GenerationInput({handlePrint}: Props) {
             <Alert color={testResult.found === labelCount ? "green" : "red"}>
               <Typography>{testResult.found}/{labelCount}</Typography> QR codes found
             </Alert>
-            <Alert color={testResult.recognized === testResult.found ? "green" : "red"}>
-              <Typography>{testResult.recognized}/{testResult.found}</Typography> found QR codes recognized as valid QR codes
+            <Alert color={testResult.recognized === labelCount ? "green" : "red"}>
+              <Typography>{testResult.recognized}/{labelCount}</Typography> QR codes recognized as valid QR codes
             </Alert>
-            <Alert color={testResult.correct === testResult.recognized ? "green" : "red"}>
-              <Typography>{testResult.correct}/{testResult.recognized}</Typography> recognized QR codes scan as the correct value
+            <Alert color={testResult.correct === labelCount ? "green" : "red"}>
+              <Typography>{testResult.correct}/{labelCount}</Typography> QR codes scan as the correct value
             </Alert>
           </div>
         </> 
