@@ -12,6 +12,7 @@ export interface LabelSettings {
     inner_height?: string;
     inner_width?: string;
     vertical?: boolean;
+    gap?: string;
 }
 
 export interface Layout {
@@ -39,7 +40,8 @@ export const LAYOUTS: Layout[] = [
             qr_size: "9mm",
             height: "h-[10mm]",
             width: "w-[25.4mm]",
-            inner_width: "w-[24.4mm]"
+            inner_width: "w-[24.4mm]",
+            gap: "gap-0.5"
         }
     },
     {

@@ -14,7 +14,7 @@ export default function QR({value, settings, size} : Props) {
         logoWidth={300*settings.logoModifier}
         logoHeight={300*settings.logoModifier}
         eyeRadius={EYE_RADII[settings.eye_form]}
-        style={{height: size, width: size, marginRight: "0.5mm"}}
+        style={{height: size, width: size}}
         {...settings}
     />
 };

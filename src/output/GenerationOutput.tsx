@@ -2,7 +2,7 @@ import { forwardRef, ForwardRefRenderFunction, useEffect, useMemo, useState } fr
 import Label from "./Label";
 
 import { useGenerationSettings } from "../context/GenerationContext";
-import A4 from "./A4";
+import A4 from "./paper/A4";
 import useLayout, { PAPER_SIZE } from "../settings/Layout";
 
 const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRef) => {

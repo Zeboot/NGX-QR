@@ -47,8 +47,9 @@ export default function GenerationInput({handlePrint}: Props) {
     }, [startingLabel, MAX_FOR_LAYOUT]);
 
     useEffect(() => {
-      setLabelCount(MAX_LABELS);
-    },[MAX_LABELS, layout]);
+      setLabelCount(LAYOUTS[layout].max_labels_per_page);
+      setStartingLabel(1);
+    },[layout]);
 
     useEffect(() => {
       if(labelCount > MAX_LABELS){
