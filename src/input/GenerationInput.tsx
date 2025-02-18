@@ -13,11 +13,35 @@ import { EYE_FORM } from "../settings/QRSettings";
 import getEnumKeys from "../util/getEnumKeys";
 import SelectInputField from "./fields/SelectInputField";
 import Section from "./Section";
+import jsQR from "jsqr";
 interface Props {
   handlePrint: () => void;
 }
 
-
+function test(){
+  const elements =  document.getElementsByTagName("canvas");
+  let found = 0;
+  let correct = 0;
+  for(let i = 0 ; i < elements.length; i++){
+    const ele = elements.item(i);
+    if(!ele?.id.startsWith("qr-code-")) continue;
+    const id = ele.id.replace("qr-code-", "");
+    const imageData = ele.getContext("2d")!.getImageData(0,0,600,600)!;
+    const qr = jsQR(imageData.data, imageData.width, imageData.height)!;
+    if(!qr){
+      console.log(`Error finding ${id}`)
+      continue;
+    }
+    found++;
+    if(qr.data === id){
+      correct ++;
+    }else{
+      console.log("Incorrect data at " + id)
+    }
+    
+  }
+  console.log(elements.length, found, correct)
+}
 
 export default function GenerationInput({handlePrint}: Props) {
     const context = useGenerationContext();
@@ -126,6 +150,7 @@ export default function GenerationInput({handlePrint}: Props) {
     <div className="flex justify-center gap-1">
       <Button onClick={onClick}>Generate</Button>
       <Button onClick={handlePrint}>Print</Button>
+      <Button onClick={test}>Test</Button>
     </div>
   </Card>;
 }

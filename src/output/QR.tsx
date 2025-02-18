@@ -9,7 +9,8 @@ export default function QR({value, settings, size} : Props) {
     return <QRCode  
         ecLevel={settings.ecLevel} 
         quietZone={0} 
-        value={value} 
+        value={value}
+        id={`qr-code-${value}`}
         size={300}
         logoWidth={300*settings.logoModifier}
         logoHeight={300*settings.logoModifier}
