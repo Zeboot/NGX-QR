@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogBody, DialogHeader, Input, Typography } from "@material-tailwind/react";
 import { useState } from "react";
-import { IconRenderer, useIconPicker } from "../util/IconRenderer";
+import { IconRenderer, useIconPicker } from "../../util/IconRenderer";
 import React from "react";
 
 interface Props {
@@ -11,11 +11,11 @@ interface Props {
     iconColor?: string;
 }
 
-export const DialogIconPicker = ({description, value, setValue, className, iconColor} : Props) => {
+const IconInputField = ({description, value, setValue, className, iconColor} : Props) => {
     const [open, setOpen] = useState(false);
   
     return (
-      <div className={className}>
+      <div className={className || "mb-1 flex flex-col gap-6"}>
         <Typography variant="h6" color="blue-gray" className="-mb-3">
             {description}
         </Typography>
@@ -39,6 +39,8 @@ export const DialogIconPicker = ({description, value, setValue, className, iconC
       </div>
     );
   };
+
+  export default IconInputField;
 
   const IconPicker= ({
     onChange,
