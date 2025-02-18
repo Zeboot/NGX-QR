@@ -192,6 +192,7 @@ export default function GenerationInput({handlePrint}: Props) {
             </Alert>
             <Alert color={testResult.correct === context.current.labelCount ? "green" : "red"}>
               <Typography>{testResult.correct}/{context.current.labelCount}</Typography> QR codes scan as the correct value
+
             </Alert>
           </div>
         </> 
