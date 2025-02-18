@@ -9,7 +9,7 @@ interface Props {
 }
 
 const BooleanInputField = ({ label, description, value, onChange, className }: Props) => {
-    return <div className={className}>
+    return <div className={className || "mb-1 flex flex-col gap-6"}>
             <Typography variant="h6" color="blue-gray" className="-mb-3">
                 {description}
             </Typography>

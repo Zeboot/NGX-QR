@@ -1,19 +1,23 @@
-import { Button, Card, Option, Select, Typography } from "@material-tailwind/react";
+import { Button, Card } from "@material-tailwind/react";
 import { useEffect, useMemo, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
-import NumberInputField from "./NumberInputField";
-import InputField from "./InputField";
+import NumberInputField from "./fields/NumberInputField";
+import InputField from "./fields/InputField";
 import { useQRContext } from "../context/QRContext";
 import { LAYOUTS } from "../settings/Layout";
 import { IconRenderer } from "../util/IconRenderer";
-import { DialogIconPicker } from "./IconInput";
+import IconInputField from "./fields/IconInput";
 import { renderToStaticMarkup } from "react-dom/server";
-import BooleanInputField from "./BooleanInputField";
+import BooleanInputField from "./fields/BooleanInputField";
 import { EYE_FORM } from "../settings/QRSettings";
 import getEnumKeys from "../util/getEnumKeys";
+import SelectInputField from "./fields/SelectInputField";
+import Section from "./Section";
 interface Props {
   handlePrint: () => void;
 }
+
+
 
 export default function GenerationInput({handlePrint}: Props) {
     const context = useGenerationContext();
@@ -64,70 +68,49 @@ export default function GenerationInput({handlePrint}: Props) {
           eye_form, 
           qrStyle, 
           ecLevel
-        });
+      });
     };
 
     return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">
     <form className="mt-8 mb-2 flex flex-col">
-      <div className="flex flex-col">
-        <Typography variant="h4" color="blue-gray">
-          Generation Settings
-        </Typography>
-        <div className="mb-1 flex flex-row flex-wrap gap-6">
-          <NumberInputField className="mb-1 flex flex-col gap-6" description="Starting Number" label="Starting Number" value={startingNumber} onChange={setStartingNumber} />
-          <InputField className="mb-1 flex flex-col gap-6" description="Prefix" label="Prefix" value={prefix} onChange={setPrefix} />
-          <NumberInputField className="mb-1 flex flex-col gap-6" description="Length of Number" label="Length" value={length} onChange={setLength} />
-          <NumberInputField className="mb-1 flex flex-col gap-6" description="Start at label" label="Start" min={1} max={MAX_FOR_LAYOUT} value={startingLabel} onChange={setStartingLabel} />
-          <NumberInputField className="mb-1 flex flex-col gap-6" description="# of labels" label="Count" min={1} max={MAX_LABELS} value={labelCount} onChange={setLabelCount} />
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <Typography variant="h4" color="blue-gray">
-          QR Settings
-        </Typography>
-        <div className="mb-1 flex flex-row flex-wrap gap-6">
-          <InputField className="mb-1 flex flex-col gap-6" description="Color" label="Color" value={color} onChange={setColor} type="color" />
-          <DialogIconPicker className="mb-1 flex flex-col gap-6" description="Icon" value={icon} setValue={setIcon} iconColor={iconColor} />
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">Seeker Pattern Form</Typography>
-            <Select label="Form" value={eye_form} onChange={e => setEyeForm(e as unknown as EYE_FORM)}>
-              {getEnumKeys(EYE_FORM).map((key, index) => 
-                <Option key={index} value={EYE_FORM[key]}>
-                  {EYE_FORM[key]}
-                </Option>
-              )}
-            </Select>
-          </div>
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">Dot Style</Typography>
-            <Select label="Style" value={qrStyle} onChange={e => setQRStyle(e as never)}>
-              <Option value="squares">Squares</Option>
-              <Option value="dots">Dots</Option>
-              <Option value="fluid">Fluid</Option>
-            </Select>
-          </div>
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">Error Correction</Typography>
-            <Select label="Level" value={ecLevel} onChange={e => setEcLevel(e as never)}>
-              <Option value="L">Low (7%)</Option>
-              <Option value="M">Medium (15%)</Option>
-              <Option value="Q">Quartile (25%)</Option>
-              <Option value="H">High (30%)</Option>
-            </Select>
-          </div>
-        </div>
-      </div>
+      <Section title="Generation Settings">
+        <NumberInputField description="Starting Number" label="Starting Number" value={startingNumber} onChange={setStartingNumber} />
+        <InputField description="Prefix" label="Prefix" value={prefix} onChange={setPrefix} />
+        <NumberInputField description="Length of Number" label="Length" value={length} onChange={setLength} />
+        <NumberInputField description="Start at label" label="Start" min={1} max={MAX_FOR_LAYOUT} value={startingLabel} onChange={setStartingLabel} />
+        <NumberInputField description="# of labels" label="Count" min={1} max={MAX_LABELS} value={labelCount} onChange={setLabelCount} />
+      </Section>
+      <Section title="QR Settings">
+        <InputField description="Color" label="Color" value={color} onChange={setColor} type="color" />
+        <IconInputField description="Icon" value={icon} setValue={setIcon} iconColor={iconColor} />
+        <SelectInputField
+          label="Form"
+          description="Seeker Pattern Form"
+          value={eye_form}
+          onChange={setEyeForm}
+          options={getEnumKeys(EYE_FORM).map(key => ({value: EYE_FORM[key], label: EYE_FORM[key]}))}
+        />
+        <SelectInputField
+          label="Style"
+          description="Dot Style"
+          value={qrStyle}
+          onChange={setQRStyle}
+          options={[{value: "squares", label: "Squares"}, {value: "dots", label: "Dots"}, {value: "fluid", label: "Fluid"}]}
+        />
+        <SelectInputField
+          label="Level"
+          description="Error Correction"
+          value={ecLevel}
+          onChange={setEcLevel}
+          options={[{value: "L", label: "Low (7%)"}, {value: "M", label: "Medium (15%)"}, {value: "Q", label: "Quartile (25%)"}, {value: "H", label: "High (30%)"}]}
+        />
+      </Section>
       {icon &&
-        <div className="flex flex-col">
-          <Typography variant="h4" color="blue-gray">
-            Icon Settings
-          </Typography>
-          <div className="mb-1 flex flex-row flex-wrap gap-6">
-            <InputField className="mb-1 flex flex-col gap-6" description="Icon Color" label="Icon Color" value={iconColor} onChange={setIconColor} type="color" />
-            <NumberInputField step={5} className="mb-1 flex flex-col gap-6" description="Icon Percentage" label="Percentage" min={0} max={80} value={logoModifier} onChange={setLogoModifier} />
-            <BooleanInputField className="mb-1 flex flex-col gap-6" description="Transparent background" label="Transparency" value={iconTransparency === undefined ? true : iconTransparency} onChange={setIconTransparency}/>
-          </div>
-        </div>
+        <Section title="Icon Settings">
+          <InputField description="Icon Color" label="Icon Color" value={iconColor} onChange={setIconColor} type="color" />
+          <NumberInputField step={5} description="Icon Percentage" label="Percentage" min={0} max={80} value={logoModifier} onChange={setLogoModifier} />
+          <BooleanInputField description="Transparent background" label="Transparency" value={iconTransparency === undefined ? true : iconTransparency} onChange={setIconTransparency}/>
+        </Section>
       }
     </form>
     <div className="flex justify-center gap-1">

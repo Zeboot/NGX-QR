@@ -3,7 +3,7 @@ import { EYE_FORM, QRSettings } from "../settings/QRSettings";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 
-type QRSettingsContextType = {current: QRSettings, set: (val: Partial<QRSettings>) => void};
+export type QRSettingsContextType = {current: QRSettings, set: (val: Partial<QRSettings>) => void};
 
 const QRContext = createContext<QRSettingsContextType|null>(null);
 export function QRContextProvider({children}: React.PropsWithChildren) {
