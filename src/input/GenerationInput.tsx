@@ -1,4 +1,4 @@
-import { Button, Card } from "@material-tailwind/react";
+import { Alert, Button, Card, Dialog, DialogBody, DialogHeader, Typography } from "@material-tailwind/react";
 import { useEffect, useMemo, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./fields/NumberInputField";
@@ -13,11 +13,47 @@ import { EYE_FORM } from "../settings/QRSettings";
 import getEnumKeys from "../util/getEnumKeys";
 import SelectInputField from "./fields/SelectInputField";
 import Section from "./Section";
+import jsQR from "jsqr";
 interface Props {
   handlePrint: () => void;
 }
 
+interface TestResult {
+  found: number;
+  recognized: number;
+  correct: number;
+}
 
+async function test(): Promise<TestResult>{
+  const result = {
+    found: 0,
+    recognized: 0,
+    correct: 0
+  }
+  const elements =  document.getElementsByTagName("canvas");
+  for(let i = 0 ; i < elements.length; i++){
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const ele = elements.item(i);
+    if(!ele?.id.startsWith("qr-code-")) continue;
+    result.found++;
+    const id = ele.id.replace("qr-code-", "");
+    const imageData = ele.getContext("2d")!.getImageData(0,0,ele.width,ele.height)!;
+    const qr = jsQR(imageData.data, imageData.width, imageData.height)!;
+    if(!qr){
+      console.log(`Error finding ${id}`)
+      continue;
+    }
+    result.recognized++;
+    if(qr.data === id){
+      result.correct++;
+    }else{
+      console.log(`Incorrect data at ${id}`)
+    }
+    
+  }
+  console.log(result)
+  return result;
+}
 
 export default function GenerationInput({handlePrint}: Props) {
     const context = useGenerationContext();
@@ -79,6 +115,10 @@ export default function GenerationInput({handlePrint}: Props) {
       });
     };
 
+    const [testOpen, setTestOpen] = useState(false);
+    const [testLoading, setTestLoading] = useState(false);
+    const [testResult, setTestResult] = useState<TestResult>({correct: 0, found: 0, recognized: 0});
+
     return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">
     <form className="mt-8 mb-2 flex flex-col max-w-[80%]">
       <Section title="Generation Settings">
@@ -126,7 +166,38 @@ export default function GenerationInput({handlePrint}: Props) {
     <div className="flex justify-center gap-1">
       <Button onClick={onClick}>Generate</Button>
       <Button onClick={handlePrint}>Print</Button>
+      <Button onClick={() => {
+        setTestOpen(true);
+        setTestLoading(true);
+        test().then(r => {setTestResult(r); setTestLoading(false);}) 
+      }}>Test</Button>
     </div>
+    <Dialog open={testOpen} handler={setTestOpen}>
+      <DialogHeader>
+        Testing QR Codes
+      </DialogHeader>
+      <DialogBody>
+        {testLoading ? 
+        <Typography>Analyzing QR codes...</Typography> 
+        :<>
+          <Typography>
+            Note: This test only checks validity of QR code and does not guarantee scannability - errors due to printer quality or size of QR code can still occur.
+          </Typography>
+          <div className="flex flex-row gap-2">
+            <Alert color={testResult.found === labelCount ? "green" : "red"}>
+              <Typography>{testResult.found}/{labelCount}</Typography> QR codes found
+            </Alert>
+            <Alert color={testResult.recognized === labelCount ? "green" : "red"}>
+              <Typography>{testResult.recognized}/{labelCount}</Typography> QR codes recognized as valid QR codes
+            </Alert>
+            <Alert color={testResult.correct === labelCount ? "green" : "red"}>
+              <Typography>{testResult.correct}/{labelCount}</Typography> QR codes scan as the correct value
+            </Alert>
+          </div>
+        </> 
+        }
+      </DialogBody>
+    </Dialog>
   </Card>;
 }
 

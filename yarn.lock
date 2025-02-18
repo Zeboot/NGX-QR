@@ -2327,6 +2327,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsqr@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "jsqr@npm:1.4.0"
+  checksum: 10/a959aed9e6f0af2616e0a9c29431bf4c8a617a316f6fdf3ac922c405f283224a5c77b8c8dfa5deda4e4848aeb87333dc70fe5d9cf9c116e76643c5cccc5c53f2
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.4":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -2699,6 +2706,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-react-refresh: "npm:^0.4.18"
     globals: "npm:^15.14.0"
+    jsqr: "npm:^1.4.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-qrcode-logo: "npm:^3.0.0"
