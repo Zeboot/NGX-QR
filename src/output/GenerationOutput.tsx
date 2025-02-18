@@ -29,11 +29,13 @@ const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRe
         }
     }, [layout]);
 
-    return <Page ref={contentRef}>
-                <div className="grid grid-cols-7 gap-x-[2.55mm] ">
-                    {labels}
-                </div>
-            </Page>
+    return <div className="max-w-screen overflow-x-scroll">
+        <Page ref={contentRef}>
+                    <div className="grid grid-cols-7 gap-x-[2.55mm] ">
+                        {labels}
+                    </div>
+                </Page>
+    </div>
 }
 
 const ForwardedGenerationOutput = forwardRef(GenerationOutput);

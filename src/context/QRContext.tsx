@@ -1,15 +1,20 @@
-import { useState, useContext, createContext } from "react";
-import { QRSettings } from "../settings/QRSettings";
+import { useContext, createContext } from "react";
+import { EYE_FORM, QRSettings } from "../settings/QRSettings";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 
 type QRSettingsContextType = {current: QRSettings, set: (val: Partial<QRSettings>) => void};
 
 const QRContext = createContext<QRSettingsContextType|null>(null);
 export function QRContextProvider({children}: React.PropsWithChildren) {
-    const [context, setContext] = useState<QRSettings>({
+    const [context, setContext] = useLocalStorage<QRSettings>("qr_settings", {
             fgColor: "#000000",
             logoModifier: 0.3,
-            qrStyle: "fluid"
+            qrStyle: "squares",
+            eye_form: EYE_FORM.ROUNDED_SQUARE,
+            ecLevel: "Q",
+            icon: null,
+            iconColor: '#0000FF'
         });
     const updateContext = (val: Partial<QRSettings>) => {
         setContext(old => {
