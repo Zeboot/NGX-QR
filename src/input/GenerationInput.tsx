@@ -21,6 +21,7 @@ interface Props {
 
 export default function GenerationInput({handlePrint}: Props) {
     const context = useGenerationContext();
+    const [layout, setLayout] = useState(context.current.layout);
     const [startingNumber, setStartingNumber] = useState(context.current.startingNumber);
     const [prefix, setPrefix] = useState(context.current.prefix);
     const [length, setLength] = useState(context.current.length);
@@ -38,12 +39,16 @@ export default function GenerationInput({handlePrint}: Props) {
     const [ecLevel, setEcLevel] = useState(QRContext.current.ecLevel);
 
     const MAX_FOR_LAYOUT = useMemo(() => {
-      return LAYOUTS[context.current.layout].max_labels_per_page;
-    },[context]);
+      return LAYOUTS[layout].max_labels_per_page;
+    },[layout]);
 
     const MAX_LABELS = useMemo(() => {
       return MAX_FOR_LAYOUT - startingLabel + 1;
     }, [startingLabel, MAX_FOR_LAYOUT]);
+
+    useEffect(() => {
+      setLabelCount(MAX_LABELS);
+    },[MAX_LABELS, layout]);
 
     useEffect(() => {
       if(labelCount > MAX_LABELS){
@@ -57,7 +62,7 @@ export default function GenerationInput({handlePrint}: Props) {
     }, [icon, iconColor]);
 
     const onClick = () => {
-        context.set({startingNumber, prefix, length, startingLabel, labelCount});
+        context.set({startingNumber, prefix, length, startingLabel, labelCount, layout});
         QRContext.set({
           fgColor: color, 
           icon: icon,
@@ -72,8 +77,9 @@ export default function GenerationInput({handlePrint}: Props) {
     };
 
     return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">
-    <form className="mt-8 mb-2 flex flex-col">
+    <form className="mt-8 mb-2 flex flex-col max-w-[80%]">
       <Section title="Generation Settings">
+        <SelectInputField description="Layout" label="Layout" value={layout} onChange={setLayout} options={LAYOUTS.map((opt, idx) => ({value: idx, label: opt.name}))}/>
         <NumberInputField description="Starting Number" label="Starting Number" value={startingNumber} onChange={setStartingNumber} />
         <InputField description="Prefix" label="Prefix" value={prefix} onChange={setPrefix} />
         <NumberInputField description="Length of Number" label="Length" value={length} onChange={setLength} />

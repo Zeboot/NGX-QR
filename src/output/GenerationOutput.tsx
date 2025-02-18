@@ -18,9 +18,9 @@ const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRe
     }, [context.prefix, context.length, context.startingNumber, context.startingLabel, context.labelCount, layout]);
 
     useEffect(() => {
-        const calc = Promise.all(values.map(async (value) => <Label key={value} value={value} size={layout.label_size} />));
+        const calc = Promise.all(values.map(async (value) => <Label key={value} value={value} settings={layout.label_settings} />));
         calc.then(val => setLabels(val));
-    }, [values, layout, layout.label_size]);
+    }, [values, layout, layout.label_settings]);
     
     const Page = useMemo(() => {
         switch(layout.paper_size){
@@ -31,7 +31,7 @@ const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRe
 
     return <div className="max-w-screen overflow-x-scroll">
                 <Page ref={contentRef}>
-                    <div className={`grid grid-cols-${layout.columns} gap-x-[${layout.column_gap}]`}>
+                    <div className={`grid ${layout.page_padding} ${layout.columns} ${layout.column_gap} ${layout.row_gap}`}>
                         {labels}
                     </div>
                 </Page>
