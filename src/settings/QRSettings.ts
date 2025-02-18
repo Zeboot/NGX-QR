@@ -19,7 +19,8 @@ export type QRSettings = Pick<IProps,
     "qrStyle" |
     "logoImage" |
     "removeQrCodeBehindLogo" |
-    "ecLevel"
+    "ecLevel" |
+    "logoOpacity"
     > &
 {
     logoModifier: number;

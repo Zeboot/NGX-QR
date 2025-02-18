@@ -34,6 +34,7 @@ export default function GenerationInput({handlePrint}: Props) {
     const [iconColor, setIconColor] = useState(QRContext.current.iconColor);
     const [logoModifier, setLogoModifier] = useState((QRContext.current.logoModifier*100));
     const [iconTransparency, setIconTransparency] = useState(!(QRContext.current.removeQrCodeBehindLogo));
+    const [logoOpacity, setLogoOpacity] = useState(QRContext.current.logoOpacity! * 100);
     const [eye_form, setEyeForm] = useState(QRContext.current.eye_form);
     const [qrStyle, setQRStyle] = useState(QRContext.current.qrStyle);
     const [ecLevel, setEcLevel] = useState(QRContext.current.ecLevel);
@@ -73,7 +74,8 @@ export default function GenerationInput({handlePrint}: Props) {
           !iconTransparency, 
           eye_form, 
           qrStyle, 
-          ecLevel
+          ecLevel,
+          logoOpacity: +(logoOpacity/100).toPrecision(2)
       });
     };
 
@@ -115,8 +117,9 @@ export default function GenerationInput({handlePrint}: Props) {
       {icon &&
         <Section title="Icon Settings">
           <InputField description="Icon Color" label="Icon Color" value={iconColor} onChange={setIconColor} type="color" />
-          <NumberInputField step={5} description="Icon Percentage" label="Percentage" min={0} max={80} value={logoModifier} onChange={setLogoModifier} />
+          <NumberInputField step={5} description="Icon Size (%)" label="Size" min={0} max={80} value={logoModifier} onChange={setLogoModifier} />
           <BooleanInputField description="Transparent background" label="Transparency" value={iconTransparency === undefined ? true : iconTransparency} onChange={setIconTransparency}/>
+          <NumberInputField step={1} description="Icon Opacity (%)" label="Opacity" min={0} max={100} value={logoOpacity} onChange={setLogoOpacity} />
         </Section>
       }
     </form>
