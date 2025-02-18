@@ -3,8 +3,9 @@ import { EYE_RADII, QRSettings } from "../settings/QRSettings";
 interface Props {
     value: string;
     settings: QRSettings;
+    size: string;
 }
-export default function QR({value, settings} : Props) {
+export default function QR({value, settings, size} : Props) {
     return <QRCode  
         ecLevel={settings.ecLevel} 
         quietZone={0} 
@@ -13,7 +14,7 @@ export default function QR({value, settings} : Props) {
         logoWidth={300*settings.logoModifier}
         logoHeight={300*settings.logoModifier}
         eyeRadius={EYE_RADII[settings.eye_form]}
-        style={{height: "9mm", width: "9mm", marginRight: "0.5mm"}}
+        style={{height: size, width: size, marginRight: "0.5mm"}}
         {...settings}
     />
 };
