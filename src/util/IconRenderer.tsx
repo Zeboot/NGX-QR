@@ -1,4 +1,3 @@
-"use client";
 import React, { useMemo, useState } from "react";
 import * as HeroIcons from "@heroicons/react/20/solid";
 type Icons = {

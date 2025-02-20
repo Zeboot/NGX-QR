@@ -15,15 +15,6 @@ export default defineConfig({
           if(id.includes("src/output/")){
             return "output";
           }
-          if(id.includes("src/context/")){
-            return "context";
-          }
-          if(id.includes("src/util/")){
-            return "util";
-          }
-          if(id.includes("src/settings/")){
-            return "settings";
-          }
         }
       }
     }
