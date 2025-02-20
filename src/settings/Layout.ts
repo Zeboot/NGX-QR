@@ -45,7 +45,7 @@ export const LAYOUTS: Layout[] = [
         }
     },
     {
-        name: "Avery 30x20 (Untested)",
+        name: "Avery 30x20",
         max_labels_per_page: 55,
         paper_size: PAPER_SIZE.A4,
         page_padding: "px-[2cm] py-[13.4mm]",
@@ -58,6 +58,24 @@ export const LAYOUTS: Layout[] = [
             height: "h-[20mm]",
             width: "w-[30mm]",
             inner_width: "w-[29mm]",
+            inner_height: "h-[18mm]",
+            vertical: true
+        }
+    },
+    {
+        name: "Avery 20x20 (Untested)",
+        max_labels_per_page: 96,
+        paper_size: PAPER_SIZE.A4,
+        page_padding: "px-[1.1cm] py-[0.65cm]",
+        columns: "grid-cols-8",
+        column_gap: "gap-x-[4mm]",
+        row_gap: "gap-y-[4mm]",
+        label_settings: {
+            text_size: (text: string) => text.length > 10 ? "text-[2.5mm]" : "text-[3mm]",
+            qr_size: "14mm",
+            height: "h-[20mm]",
+            width: "w-[20mm]",
+            inner_width: "w-[18mm]",
             inner_height: "h-[18mm]",
             vertical: true
         }
