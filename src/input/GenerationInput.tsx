@@ -1,19 +1,19 @@
-import { Button, Card} from "@material-tailwind/react";
+import Card from "@material-tailwind/react/components/Card";
+import Button from "@material-tailwind/react/components/Button";
 import { useEffect, useMemo, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./fields/NumberInputField";
 import InputField from "./fields/InputField";
 import { useQRContext } from "../context/QRContext";
 import { LAYOUTS } from "../settings/Layout";
-import { IconRenderer } from "../util/IconRenderer";
 import IconInputField from "./fields/IconInput";
-import { renderToStaticMarkup } from "react-dom/server";
 import BooleanInputField from "./fields/BooleanInputField";
 import { EYE_FORM } from "../settings/QRSettings";
 import getEnumKeys from "../util/getEnumKeys";
 import SelectInputField from "./fields/SelectInputField";
 import Section from "./Section";
 import QRTester from "./QRTester";
+import iconToBase64 from "../util/iconToBase64";
 interface Props {
   handlePrint: () => void;
 }
@@ -58,8 +58,7 @@ export default function GenerationInput({handlePrint}: Props) {
     }, [MAX_LABELS, labelCount]);    
 
     const iconBase64 = useMemo(() => {
-      if(icon === null) return undefined;
-      return 'data:image/svg+xml;base64,' + window.btoa(renderToStaticMarkup(<IconRenderer icon={icon} fill={iconColor} />));
+      return iconToBase64(icon, iconColor)
     }, [icon, iconColor]);
 
     const onClick = () => {

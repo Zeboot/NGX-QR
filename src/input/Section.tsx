@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import Typography from "@material-tailwind/react/components/Typography";
 import { PropsWithChildren } from "react";
 
 export default function Section({title, children}: PropsWithChildren<{title: string}>) {

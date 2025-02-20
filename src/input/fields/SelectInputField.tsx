@@ -1,4 +1,5 @@
-import { Option, Select, Typography } from "@material-tailwind/react";
+import { Select, Option } from "@material-tailwind/react/components/Select";
+import Typography from "@material-tailwind/react/components/Typography";
 
 interface Props<T> {
     label: string;

@@ -1,5 +1,8 @@
-import { Dialog, DialogHeader, DialogBody, Typography, Alert, Progress } from "@material-tailwind/react";
-import jsQR from "jsqr";
+
+import Alert from "@material-tailwind/react/components/Alert";
+import Dialog, { DialogBody, DialogHeader } from "@material-tailwind/react/components/Dialog";
+import Progress from "@material-tailwind/react/components/Progress";
+import Typography from "@material-tailwind/react/components/Typography";
 import { useEffect, useState } from "react";
 interface TestResultSummary {
     found: number;
@@ -50,7 +53,7 @@ export default function QRTester({open, setOpen, labelCount}: Props){
                 await new Promise((resolve) => setTimeout(resolve, 0));
                 const id = code.id.replace("qr-code-", "");
                 const imageData = code.getContext("2d")!.getImageData(0,0,code.width,code.height)!;
-                const qr = jsQR(imageData.data, imageData.width, imageData.height)!;
+                const qr = (await import("jsqr")).default(imageData.data, imageData.width, imageData.height)!;
                 if(!qr){
                     console.log(`Error finding ${id}`)
                     continue;

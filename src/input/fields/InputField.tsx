@@ -1,4 +1,5 @@
-import { Typography, Input } from "@material-tailwind/react";
+import Input from "@material-tailwind/react/components/Input";
+import Typography from "@material-tailwind/react/components/Typography";
 
 interface Props<T> {
     label: string;

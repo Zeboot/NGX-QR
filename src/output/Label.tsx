@@ -1,7 +1,7 @@
-import { Typography } from "@material-tailwind/react";
+import Typography from "@material-tailwind/react/components/Typography";
 import { useQRSettings } from "../context/QRContext";
-import QR from "./QR";
 import { LabelSettings } from "../settings/Layout";
+import QR from "./QR";
 
 export default function Label({settings, value} : {settings: LabelSettings, value?: string}) {
     const QRContext = useQRSettings();

@@ -1,4 +1,5 @@
-import { Typography, Checkbox } from "@material-tailwind/react";
+import Checkbox from "@material-tailwind/react/components/Checkbox";
+import Typography from "@material-tailwind/react/components/Typography";
 
 interface Props {
     label: string;

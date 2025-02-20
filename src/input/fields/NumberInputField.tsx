@@ -1,4 +1,7 @@
-import { Typography, Input, IconButton } from "@material-tailwind/react";
+import IconButton from "@material-tailwind/react/components/IconButton";
+import Input from "@material-tailwind/react/components/Input";
+import Typography from "@material-tailwind/react/components/Typography";
+
 import { useCallback } from "react";
 
 interface Props {
