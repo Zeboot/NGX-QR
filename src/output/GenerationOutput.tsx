@@ -23,13 +23,11 @@ const GenerationOutput: ForwardRefRenderFunction<HTMLDivElement> = (_, contentRe
         }
     }, [layout]);
 
-    return <div className="max-w-screen overflow-x-scroll">
-                <Page ref={contentRef}>
-                    <div className={`grid ${layout.page_padding} ${layout.columns} ${layout.column_gap} ${layout.row_gap}`}>
-                        {values.map((value) => <Label key={value} value={value} settings={layout.label_settings} />)}
-                    </div>
-                </Page>
-            </div>;
+    return <Page ref={contentRef}>
+                <div className={`grid ${layout.page_padding} ${layout.columns} ${layout.column_gap} ${layout.row_gap}`}>
+                    {values.map((value) => <Label key={value} value={value} settings={layout.label_settings} />)}
+                </div>
+            </Page>;
 }
 
 const ForwardedGenerationOutput = forwardRef(GenerationOutput);

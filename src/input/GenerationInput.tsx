@@ -77,7 +77,7 @@ export default function GenerationInput({handlePrint}: Props) {
 
     const [testOpen, setTestOpen] = useState(false);
 
-    return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen">
+    return <Card color="transparent" shadow={true} className="container items-center mx-auto max-w-screen print:hidden">
     <form className="mt-8 mb-2 flex flex-col max-w-[80%]">
       <Section title="Generation Settings">
         <SelectInputField description="Layout" label="Layout" value={layout} onChange={setLayout} options={LAYOUTS.map((opt, idx) => ({value: idx, label: opt.name}))}/>

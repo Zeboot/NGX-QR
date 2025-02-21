@@ -11,10 +11,10 @@ function App() {
         contentRef
     });
   return (
-    <>
+    <div>
       <GenerationInput handlePrint={handlePrint}/>
       <GenerationOutput ref={contentRef}/>
-    </>
+    </div>
   )
 }
 
