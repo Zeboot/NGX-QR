@@ -93,10 +93,10 @@ export default function QRTester({open, setOpen, labelCount}: Props){
             <Typography>{testResult.found}/{labelCount}</Typography> QR codes found
           </Alert>
           <Alert color={testResult.recognized === labelCount ? "green" : "red"}>
-            <Typography>{testResult.recognized}/{labelCount}</Typography> QR codes recognized as valid QR codes
+            <Typography>{testResult.recognized}/{labelCount}</Typography> QR codes are valid
           </Alert>
           <Alert color={testResult.correct === labelCount ? "green" : "red"}>
-            <Typography>{testResult.correct}/{labelCount}</Typography> QR codes scan as the correct value
+            <Typography>{testResult.correct}/{labelCount}</Typography> QR codes are correct
 
           </Alert>
         </div>
