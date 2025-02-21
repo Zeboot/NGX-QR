@@ -46,7 +46,7 @@ const NumberInputField = ({ label, description, value, onChange, className, min,
                         variant="text"
                         className="rounded"
                         onClick={() => onChange((value === 0 ? 0 : value - (step || 1)))}
-                        disabled={min ? value <= min : false}
+                        disabled={min !== undefined ? value <= min : false}
                     >
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ const NumberInputField = ({ label, description, value, onChange, className, min,
                         variant="text"
                         className="rounded"
                         onClick={() => onChange(value + (step || 1))}
-                        disabled={max ? value >= max : false}
+                        disabled={max !== undefined ? value >= max : false}
                     >
                         <svg
                         xmlns="http://www.w3.org/2000/svg"

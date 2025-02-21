@@ -81,9 +81,9 @@ export default function GenerationInput({handlePrint}: Props) {
     <form className="mt-8 mb-2 flex flex-col max-w-[80%]">
       <Section title="Generation Settings">
         <SelectInputField description="Layout" label="Layout" value={layout} onChange={setLayout} options={LAYOUTS.map((opt, idx) => ({value: idx, label: opt.name}))}/>
-        <NumberInputField description="Starting Number" label="Starting Number" value={startingNumber} onChange={setStartingNumber} />
+        <NumberInputField description="Starting Number" label="Starting Number" min={0} value={startingNumber} onChange={setStartingNumber} />
         <InputField description="Prefix" label="Prefix" value={prefix} onChange={setPrefix} />
-        <NumberInputField description="Length of Number" label="Length" value={length} onChange={setLength} />
+        <NumberInputField description="Length of Number" label="Length" min={1} value={length} onChange={setLength} />
         <NumberInputField description="Start at label" label="Start" min={1} max={MAX_FOR_LAYOUT} value={startingLabel} onChange={setStartingLabel} />
         <NumberInputField description="# of labels" label="Count" min={1} max={MAX_LABELS} value={labelCount} onChange={setLabelCount} />
       </Section>
