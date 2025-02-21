@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { forwardRef, ForwardRefRenderFunction, useMemo, useState } from "react";
 import * as HeroIcons from "@heroicons/react/20/solid";
 type Icons = {
   // the name of the component
@@ -43,17 +43,20 @@ export const useIconPicker = (): {
   return { search, setSearch, icons: filteredIcons };
 };
 
-export const IconRenderer = ({
-  icon,
-  ...rest
-}: {
+const IconRenderer: ForwardRefRenderFunction<SVGSVGElement, React.ComponentPropsWithoutRef<"svg"> & {
   icon: string;
-} & React.ComponentPropsWithoutRef<"svg">) => {
+}> = ({
+    icon,
+    ...rest
+  }, ref) => {
   const IconComponent = HeroIcons[icon as keyof typeof HeroIcons];
 
   if (!IconComponent) {
     return null;
   }
 
-  return <IconComponent data-slot="icon" {...rest} />;
+  return <IconComponent ref={ref} data-slot="icon" {...rest} />;
 };
+
+const ForwardedIconRenderer = forwardRef(IconRenderer);
+export {ForwardedIconRenderer as IconRenderer};

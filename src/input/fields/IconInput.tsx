@@ -1,5 +1,5 @@
 import Typography from "@material-tailwind/react/components/Typography";
-import { lazy, useState } from "react";
+import {  lazy,  RefObject,  useState } from "react";
 import { IconRenderer } from "../../util/IconRenderer";
 import Button from "@material-tailwind/react/components/Button";
 const IconPicker = lazy(() => import('../../util/IconPicker'))
@@ -9,18 +9,18 @@ interface Props {
     setValue: (val: string | null) => void;
     className?: string;
     iconColor?: string;
+    iconRef: RefObject<SVGSVGElement>;
 }
 
-const IconInputField = ({description, value, setValue, className, iconColor} : Props) => {
+const IconInputField = ({description, value, setValue, className, iconColor, iconRef}: Props) => {
     const [open, setOpen] = useState(false);
-  
     return (
       <div className={className || "mb-1 flex flex-col gap-6"}>
         <Typography variant="h6" color="blue-gray" className="-mb-3">
             {description}
         </Typography>
         <div className="flex gap-1 justify-center items-center">
-            {value ? <IconRenderer className="h-8 w-8" icon={value} fill={iconColor} /> : <div className="h-8 w-8"></div>}
+            {value ? <IconRenderer ref={iconRef} className="h-8 w-8" icon={value} fill={iconColor} /> : <div className="h-8 w-8"></div>}
             <Button onClick={() => setOpen(true)} className="mb-1 flex gap-3 items-center box-border" size="md">
             Select
             </Button>

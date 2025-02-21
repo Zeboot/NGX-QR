@@ -1,6 +1,6 @@
 import Card from "@material-tailwind/react/components/Card";
 import Button from "@material-tailwind/react/components/Button";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useGenerationContext } from "../context/GenerationContext";
 import NumberInputField from "./fields/NumberInputField";
 import InputField from "./fields/InputField";
@@ -14,6 +14,7 @@ import SelectInputField from "./fields/SelectInputField";
 import Section from "./Section";
 import QRTester from "./QRTester";
 import iconToBase64 from "../util/iconToBase64";
+
 interface Props {
   handlePrint: () => void;
 }
@@ -29,6 +30,7 @@ export default function GenerationInput({handlePrint}: Props) {
 
     const QRContext = useQRContext();
     const [color, setColor] = useState(QRContext.current.fgColor);
+    const iconRef = useRef<SVGSVGElement>(null);
     const [icon, setIcon] = useState<string | null>(QRContext.current.icon);
     const [iconColor, setIconColor] = useState(QRContext.current.iconColor);
     const [logoModifier, setLogoModifier] = useState((QRContext.current.logoModifier*100));
@@ -57,16 +59,12 @@ export default function GenerationInput({handlePrint}: Props) {
       }
     }, [MAX_LABELS, labelCount]);    
 
-    const iconBase64 = useMemo(() => {
-      return iconToBase64(icon, iconColor)
-    }, [icon, iconColor]);
-
     const onClick = () => {
         context.set({startingNumber, prefix, length, startingLabel, labelCount, layout});
         QRContext.set({
           fgColor: color, 
           icon: icon,
-          logoImage: iconBase64, 
+          logoImage: iconToBase64(iconRef.current), 
           logoModifier: +(logoModifier/100).toPrecision(2), 
           removeQrCodeBehindLogo: 
           !iconTransparency, 
@@ -91,7 +89,7 @@ export default function GenerationInput({handlePrint}: Props) {
       </Section>
       <Section title="QR Settings">
         <InputField description="Color" label="Color" value={color} onChange={setColor} type="color" />
-        <IconInputField description="Icon" value={icon} setValue={setIcon} iconColor={iconColor} />
+        <IconInputField iconRef={iconRef} description="Icon" value={icon} setValue={setIcon} iconColor={iconColor} />
         <SelectInputField
           label="Form"
           description="Seeker Pattern Form"
