@@ -3,8 +3,14 @@
 @tailwind utilities;
 @media print {
     @page {
-        
         margin: 0 !important;
+        size:auto;
+    }
+    @page :footer {
+        display:none;
+    }
+    @page :header {
+        display:none;
     }
     html, body {
         height: 100vh; /* Use 100% here to support printing more than a single page*/
