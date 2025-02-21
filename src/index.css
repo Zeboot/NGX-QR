@@ -3,7 +3,7 @@
 @tailwind utilities;
 @media print {
     @page {
-        size: A4;
+        
         margin: 0 !important;
     }
     html, body {
@@ -11,5 +11,6 @@
         margin: 0 !important;
         padding: 0 !important;
         overflow: hidden;
+        height: fit-content;
     }
 }
