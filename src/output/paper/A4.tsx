@@ -1,7 +1,7 @@
 import { forwardRef, ForwardRefRenderFunction } from "react"
 
 const A4: ForwardRefRenderFunction<HTMLDivElement, React.PropsWithChildren> = ({children}, contentRef)  =>{
-    return <div ref={contentRef} className="container mx-auto print:w-full print:max-w-full print:border-0 w-[210mm] h-[297mm] border-1">
+    return <div ref={contentRef} className="container mx-auto print:w-full print:max-w-full print:border-0 w-[210mm] h-[297mm] border border-black">
         {children}
     </div>
 }
